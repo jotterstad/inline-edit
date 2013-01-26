@@ -1,0 +1,70 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+//Give the input a default value from the current id
+    $("#current_edit input").attr("value", $("#current").text());
+    $("#current_edit").css("display", "none");
+    
+    //Click to edit
+    $("#current").click(function(){
+        $("#current").css("display", "none");
+        $("#current_edit").css("display", "block");
+        $("#current_edit input").attr("value", "");
+    });
+    
+    //Click to cancel
+    $("#cancel").click(function(){
+        $("#current_edit").css("display", "none");
+        $("#current").css("display", "block");
+    });
+    
+    //Click to save
+    $("#save").click(function(){
+        //normally this would be the ajax post, but for demo's sake we will just write the val to the browser instead.
+        var newtext = $("#edit").val();
+        $("#current_edit").css("display", "none");
+        $("#current").css("display", "block");
+        $("#current").html(newtext);
+        
+        if(newtext == "")
+        {
+            $("#current").html("You didn't enter anything");    
+        }
+    });
+});
+</script>
+
+<style>
+body {
+    font-size: 14px;
+    font-family: Verdana, Geneva, sans-serif;
+    line-height: 0;
+}
+
+input {
+    font-size: 14px;
+    font-family: Verdana, Geneva, sans-serif;
+    line-height: 0;
+}
+
+#wrapper {
+    margin-top: 25px;
+    width: 75%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.control {
+    cursor: pointer;
+}
+
+.control:hover {
+    text-decoration: underline;
+}
+</style>
+
+<div id="wrapper">
+<div id="current">Click to Edit</div>
+<div id="current_edit">
+    <input type="text" id="edit" value=""/>&nbsp;<span id="save" class="control">Save</span> | <span id="cancel" class="control">Cancel</span>
+</div>
